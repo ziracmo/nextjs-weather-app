@@ -5,11 +5,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Accueil", href: "#", current: true },
-  { name: "Présentation", href: "#", current: false },
-  { name: "Compétence", href: "#", current: false },
-  { name: "Travail", href: "#", current: false },
-  { name: "Contact", href: "#", current: false },
+  { name: "Home", href: "#", current: true }
 ];
 
 function classNames(...classes: string[]) {
@@ -18,7 +14,7 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 fixed w-screen top-0 z-10 shadow  ">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -36,7 +32,7 @@ export default function Header() {
               </div>
               <div>
                 <LightningBoltIcon
-                  className="block h-6 w-6 text-white"
+                  className="block h-6 w-6 text-white invisible md:visible"
                   aria-hidden="true"
                 />
               </div>

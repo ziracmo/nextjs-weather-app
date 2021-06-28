@@ -1,0 +1,14 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+.btn {
+    @extend .bg-red-500 !optional;
+    @extend .px-4 !optional;
+    @extend .py-3 !optional;
+    @extend .rounded-lg !optional;
+    
+    &:hover {
+        @extend .bg-red-400 !optional;
+    }
+}
