@@ -3,12 +3,27 @@
 @import "~tailwindcss/utilities";
 
 .btn {
-    @extend .bg-red-500 !optional;
-    @extend .px-4 !optional;
-    @extend .py-3 !optional;
-    @extend .rounded-lg !optional;
-    
-    &:hover {
-        @extend .bg-red-400 !optional;
-    }
+  @extend .bg-red-500 !optional;
+  @extend .px-4 !optional;
+  @extend .py-3 !optional;
+  @extend .rounded-lg !optional;
+
+  &:hover {
+    @extend .bg-red-400 !optional;
+  }
+}
+
+.weather-card {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../public/images/day.jpeg");
+}
+
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.text-shadow-none {
+  text-shadow: none;
 }
