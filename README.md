@@ -2,6 +2,9 @@
 
 Project with Typescript / NextJS and TailwindCSS. Using the OpenWeatherMap API to get the current weather informations of a city.
 
+![Alt text](public/images/weather-screen.png?raw=true "NextJS Weather App")
+
+
 ## Getting Started
 
 Install the dependencies :
