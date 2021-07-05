@@ -1,6 +1,8 @@
 @import "~tailwindcss/base";
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
+@import "~noty/src/noty.scss";
+@import "~noty/src/themes/nest.scss";
 
 .btn {
   @extend .bg-red-500 !optional;

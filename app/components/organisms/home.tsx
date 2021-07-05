@@ -5,26 +5,39 @@ import Wave from "../atoms/wave";
 import { Weather } from "models/weather";
 import WeatherCard from "../molecules/weather-card";
 import { getWeatherFromCity } from "services/weather";
+import { showToast } from "services/toast";
 
 type Props = {};
 
 type State = {
-  weather?: Weather;
+  weathers: Weather[];
 };
 export default class HomeSection extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      weathers: [],
+    };
     this.search = this.search.bind(this);
   }
 
   async search(value: string) {
-    const res = await getWeatherFromCity(value);
-    this.setState({ weather: res });
+    // Check if city is already existing before doing an API call
+    const ngArray: Weather[] = this.state.weathers;
+    const filteredArray = ngArray.filter(v => v.name.toUpperCase() === value.toUpperCase());
+    if(!filteredArray.length) {
+      try {
+        const res = await getWeatherFromCity(value)
+        ngArray.push(res);
+        this.setState({ weathers: ngArray });
+      } catch(e) {
+        showToast('City not found', 'error')
+      }
+    }
   }
 
   render() {
-    const { weather } = this.state;
+    const { weathers } = this.state;
 
     return (
       <section className="h-screen from-red-600 to-red-800 bg-gradient-to-r relative">
@@ -33,11 +46,13 @@ export default class HomeSection extends React.Component<Props, State> {
           <div className="w-full mx-auto">
             <SearchBar searchQuery="Toulouse" setSearchQuery={this.search} />
           </div>
-          {weather ? (
+          {weathers.length ? (
             <div className="w-full mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-4 px-6 md:px-8 h-full pb-40">
-              <WeatherCard weather={weather} />
+              {weathers.map((w, i) => {
+                return <WeatherCard key={i} weather={w} />;
+              })}
             </div>
-          ): null}
+          ) : null}
         </div>
         <div className="absolute bottom-0 w-screen">
           <Wave color="white" classes="h-12 w-screen" />

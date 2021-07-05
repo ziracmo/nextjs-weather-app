@@ -11,15 +11,19 @@ const config = {
 const handler = async (req: NextApiRequest, res: NextApiResponse<Weather>) => {
   const method = req.method;
   const query = req.query;
-  console.log(query)
   if (method === "GET") {
     if(!query.city) {
       return res.status(400);
     }
-    const weather = await axios.get(
-      `${config.url}weather?q=${query.city}&appid=${config.apiKey}&units=metric`
-    );
-    res.status(200).json(weather.data as Weather);
+    try {
+      const weather = await axios.get(
+        `${config.url}weather?q=${query.city}&appid=${config.apiKey}&units=metric`
+      );
+      return res.status(200).json(weather.data as Weather);
+    } catch(e){
+      return res.status(404).send(e);
+    }
+
   }
 };
 
