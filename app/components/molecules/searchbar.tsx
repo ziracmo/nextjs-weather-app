@@ -15,14 +15,21 @@ export default class SearchBar extends React.Component<Props, State> {
     this.state.value = this.props.searchQuery;
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   public handleChange(event: any) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   public handleClick() {
     this.props.setSearchQuery(this.state.value);
+  }
+
+  public handleKeyDown(event: any) {
+    if (event.key === "Enter") {
+      this.props.setSearchQuery(this.state.value);
+    }
   }
 
   render() {
@@ -34,6 +41,7 @@ export default class SearchBar extends React.Component<Props, State> {
           <input
             value={value}
             onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
             className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
             id="search"
             type="text"

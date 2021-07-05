@@ -2,10 +2,10 @@ import CustomParticles from "../atoms/particles";
 import React from "react";
 import SearchBar from "../molecules/searchbar";
 import Wave from "../atoms/wave";
-import { Weather } from "models/weather";
+import { Weather } from "../../models/weather";
 import WeatherCard from "../molecules/weather-card";
-import { getWeatherFromCity } from "services/weather";
-import { showToast } from "services/toast";
+import { getWeatherFromCity } from "../../services/weather";
+import { showToast } from "../../services/toast";
 
 type Props = {};
 
@@ -19,6 +19,7 @@ export default class HomeSection extends React.Component<Props, State> {
       weathers: [],
     };
     this.search = this.search.bind(this);
+    this.onWeatherClose = this.onWeatherClose.bind(this);
   }
 
   async search(value: string) {
@@ -36,6 +37,13 @@ export default class HomeSection extends React.Component<Props, State> {
     }
   }
 
+  public onWeatherClose(weather: Weather) {
+    const weathers = this.state.weathers;
+    const index = weathers.findIndex(w => w.name === weather.name);
+    weathers.splice(index, 1);
+    this.setState({weathers})
+  }
+
   render() {
     const { weathers } = this.state;
 
@@ -49,7 +57,7 @@ export default class HomeSection extends React.Component<Props, State> {
           {weathers.length ? (
             <div className="w-full mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-4 px-6 md:px-8 h-full pb-40">
               {weathers.map((w, i) => {
-                return <WeatherCard key={i} weather={w} />;
+                return <WeatherCard key={i} weather={w} closeClick={this.onWeatherClose} />;
               })}
             </div>
           ) : null}

@@ -20,6 +20,10 @@
   background-position: center;
   background-size: cover;
   background-image: url("../public/images/day.jpeg");
+
+  &.dark {
+    background-image: url("../public/images/night.jpeg");
+  }
 }
 
 .text-shadow {
